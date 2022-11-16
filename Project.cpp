@@ -1,11 +1,26 @@
-//Team 6
+// Team 6
 
 #include <iostream>
 using namespace std;
 
-int main(){}
+int main() {}
 
-//Champiom
+// Game
+class game{
+private:
+    /* data */
+public:
+    game(/* args */);
+    ~game();
+};
+
+game::game(/* args */){
+}
+
+game::~game(){
+}
+
+// Champiom
 class champion{
 private:
     /* data */
@@ -20,8 +35,9 @@ champion::champion(/* args */){
 champion::~champion(){
 }
 
-//Map
-class map{
+// Map
+class map
+{
 private:
     /* data */
 public:
@@ -34,5 +50,3 @@ map::map(/* args */){
 
 map::~map(){
 }
-
-

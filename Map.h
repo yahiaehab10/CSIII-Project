@@ -2,15 +2,22 @@
 #define MAP_H_INCLUDED
 #include "Point.h"
 
+const int rows = 10;
+const int cols = 10;
+
 class Map
 {
 private:
-    char *map;
+    char **map;
 
 public:
     Map()
     {
-        map = (char*)malloc(100 * sizeof(char)); // AAAAAAAAA
+        // map = (char*)malloc(100 * sizeof(char)); // AAAAAAAAA
+        map = new char*[rows]; // allocates 10 rows as pointers
+
+        for (int i = 0; i < rows; i++) // allocates 10 columns per row
+            map[i] = new char[cols];
     }
     ~Map();
 

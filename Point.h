@@ -7,8 +7,8 @@ private:
     int X, Y;
 
 public:
-    Point(int X = 0, int Y = 0) : X(X), Y(Y) {}
-
+    Point(int X, int Y);
+    Point();
     // ~Point() {}
 
     void setPoint(int a, int b);

@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include "Champion.h"
 
+
 Champion::getCurrentHP()
 {
     return currentHP;

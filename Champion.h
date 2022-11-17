@@ -10,13 +10,7 @@ private:
     Point location;
 
 public:
-    Champion()
-    {
-        name = "Mario";
-        maxHP = 100;
-        currentHP = maxHP;
-        location.setPoint(0, 0);
-    }
+    Champion();
     ~Champion();
 
     int getCurrentHP();

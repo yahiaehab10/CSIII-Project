@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Point::setPoint(int a, int b) : X(a), Y(b) {}
+// Point::setPoint(int a, int b) : X(a), Y(b) {}
 
 Point::getX()
 {

@@ -9,7 +9,7 @@ class Champion
 private:
     string name;
     int maxHP, currentHP, gemsCollected;
-    Point location;
+    Point *location;
 
 public:
     Champion();
@@ -18,7 +18,7 @@ public:
     int getCurrentHP();
     void setCurrentHP(int hp);
     Point getLocation();
-    void setLocation(Point p);
+    void setLocation(Point *p);
     int getNumOfGems();
     void setNumOfGems(int gems);
     void printChampionInfo();

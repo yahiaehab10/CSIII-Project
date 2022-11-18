@@ -17,16 +17,16 @@ Point::Point()
     this->Y = 0;
 }
 
-Point::setPoint(int x, int y)
+void Point::setPoint(int x, int y)
 {
 }
 
-Point::getX()
+int Point::getX()
 {
     return X;
 }
 
-Point::getY()
+int Point::getY()
 {
     return Y;
 }

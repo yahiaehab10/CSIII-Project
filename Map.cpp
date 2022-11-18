@@ -14,7 +14,7 @@ Map::Map()
     printMap();
 }
 
-Map::randomiseMap()
+void Map::randomiseMap()
 {
     for (int i = 0; i < 10; i++)
     {
@@ -46,7 +46,7 @@ Map::randomiseMap()
     }
 }
 
-Map::printMap()
+void Map::printMap()
 {
     for (int i = 0; i < 10; i++)
     {
@@ -58,12 +58,12 @@ Map::printMap()
     }
 }
 
-// Map::objectAt(Point location)
+// char Map::objectAt(Point location)
 // {
 // }
 
-int main()
-{
-    Map *map = new Map();
-    return 0;
-}
+// int main()
+// {
+//     Map *map = new Map();
+//     return 0;
+// }

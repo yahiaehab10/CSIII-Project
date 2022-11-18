@@ -12,12 +12,12 @@ Champion::Champion()
     this->location = new Point(0, 0);
 }
 
-Champion::getCurrentHP()
+int Champion::getCurrentHP()
 {
     return currentHP;
 }
 
-Champion::setCurrentHP(int hp)
+void Champion::setCurrentHP(int hp)
 {
     if (hp > this->maxHP)
         this->currentHP = this->maxHP;
@@ -27,22 +27,22 @@ Champion::setCurrentHP(int hp)
         this->currentHP = hp;
 }
 
-Champion::getLocation()
+Point Champion::getLocation()
 {
-    return location;
+    return *location;
 }
 
-Champion::setLocation(Point p)
+void Champion::setLocation(Point *p)
 {
     location = p;
 }
 
-Champion::getNumOfGems()
+int Champion::getNumOfGems()
 {
     return gemsCollected;
 }
 
-Champion::setNumOfGems(int gems)
+void Champion::setNumOfGems(int gems)
 {
     if (gems < 0)
         gemsCollected = 0;
@@ -50,7 +50,7 @@ Champion::setNumOfGems(int gems)
         gemsCollected = gems;
 }
 
-Champion::void printChampionInfo()
+void Champion::printChampionInfo()
 {
-    cout << "Name: " << name << "\nLocation: " << location << "\nGems Collected: " << gemsCollected << endl;
+    cout << "Name: " << name << "\nLocation: " << location->getX() << ", " << location->getY() << "\nGems Collected: " << gemsCollected << endl;
 }

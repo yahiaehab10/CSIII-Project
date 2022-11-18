@@ -14,12 +14,12 @@ private:
 public:
     Map();
 
-    // void randomiseMap();
-    // void printMap();
-    // char objectAt(Point location);
-    int randomiseMap();
-    int printMap();
-    int objectAt(Point location);
+    void randomiseMap();
+    void printMap();
+    char objectAt(Point location);
+    // int randomiseMap();
+    // int printMap();
+    // int objectAt(Point location);
     ~Map();
 };
 

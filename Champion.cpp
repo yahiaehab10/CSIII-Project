@@ -1,6 +1,16 @@
 #include <bits/stdc++.h>
 #include "Champion.h"
 
+using namespace std;
+
+Champion::Champion()
+{
+    this->name = "Mario";
+    this->maxHP = 100;
+    this->currentHP = this->maxHP;
+    this->gemsCollected = 0;
+    this->location = new Point(0, 0);
+}
 
 Champion::getCurrentHP()
 {

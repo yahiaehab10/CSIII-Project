@@ -28,7 +28,7 @@ Map::randomiseMap()
         int x = rand() % 10;
         int y = rand() % 10;
 
-        if (map[x][y] == 'O' && (x != 0 && y != 0)) // == null?
+        if (map[x][y] == 'O' && !(x == 0 && y == 0)) // == null?
             map[x][y] = 'x';
         else
             i--;
@@ -39,8 +39,8 @@ Map::randomiseMap()
         int x = rand() % 10;
         int y = rand() % 10;
 
-        if (map[x][y] == 'O' && (x != 0 && y != 0)) // == null?
-            map[x][y] = '◈';
+        if (map[x][y] == 'O' && !(x == 0 && y == 0)) // == null?
+            map[x][y] = 'Y';
         else
             i--;
     }
@@ -52,18 +52,18 @@ Map::printMap()
     {
         for (int j = 0; j < 10; j++)
         {
-            cout << map[i][j] << " ";
+            cout << map[i][j] << ' ';
         }
-        puts("\n");
+        cout << "\n";
     }
 }
 
-Map::objectAt(Point location)
-{
-}
+// Map::objectAt(Point location)
+// {
+// }
 
 int main()
 {
-    Map map = (Map) malloc(sizeof(Map));
+    Map *map = new Map();
     return 0;
 }

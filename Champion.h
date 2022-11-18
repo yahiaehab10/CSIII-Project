@@ -2,6 +2,8 @@
 #define Champion_H_Included
 #include "Point.h"
 
+using namespace std;
+
 class Champion
 {
 private:

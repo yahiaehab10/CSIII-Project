@@ -40,7 +40,7 @@ void Map::randomiseMap()
         int y = rand() % 10;
 
         if (map[x][y] == 'O' && !(x == 0 && y == 0)) // == null?
-            map[x][y] = 'Y';
+            map[x][y] = 'G';
         else
             i--;
     }

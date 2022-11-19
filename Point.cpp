@@ -5,7 +5,7 @@ using namespace std;
 
 // Point::setPoint(int a, int b) : X(a), Y(b) {}
 
-Point::Point(int x, int y)
+Point::Point(int X, int Y)
 {
     this->X = X;
     this->Y = Y;
@@ -19,6 +19,8 @@ Point::Point()
 
 void Point::setPoint(int x, int y)
 {
+    this->X = x;
+    this->Y = y ;
 }
 
 int Point::getX()

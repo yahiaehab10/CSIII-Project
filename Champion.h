@@ -13,8 +13,6 @@ private:
 
 public:
     Champion();
-    ~Champion();
-
     int getCurrentHP();
     void setCurrentHP(int hp);
     Point getLocation();
@@ -22,6 +20,7 @@ public:
     int getNumOfGems();
     void setNumOfGems(int gems);
     void printChampionInfo();
+    ~Champion();
 };
 
 #endif

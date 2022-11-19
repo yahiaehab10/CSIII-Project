@@ -151,6 +151,7 @@ public:
     }
     ~Champion();
 };
+
 class engine
 {
 private:

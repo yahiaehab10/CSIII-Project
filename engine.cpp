@@ -8,5 +8,17 @@ using namespace std;
 class engine
 {
 private:
-    Map *map;
+     Map *map ;
+     Champion c;
+     Point p;
+public:
+    engine(){
+        map = new Map();
+    }
+    ~engine();
+};
+
+int main()
+{
+    engine e();
 }

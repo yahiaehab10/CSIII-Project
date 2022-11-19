@@ -58,12 +58,13 @@ void Map::printMap()
     }
 }
 
+
 // char Map::objectAt(Point location)
 // {
 // }
 
-// int main()
-// {
-//     Map *map = new Map();
-//     return 0;
-// }
+int main()
+{
+    Map *map = new Map();
+    return 0;
+}

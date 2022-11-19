@@ -151,6 +151,18 @@ public:
     }
     ~Champion();
 };
+class engine
+{
+private:
+     Map *map ;
+     Champion c;
+     Point p;
+public:
+    engine(){
+        map = new Map();
+    }
+    ~engine();
+};
 
 int main(){
     Map *map = new Map();

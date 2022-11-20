@@ -5,11 +5,47 @@ using namespace std;
 
 Champion::Champion()
 {
-    this->name = "Mario";
+    this->name = 'M';
     this->maxHP = 100;
     this->currentHP = this->maxHP;
     this->gemsCollected = 0;
-    this->location = new Point(0, 0);
+    this->x = 0;
+    this->y = 0;
+}
+
+int Champion::getX()
+{
+    return x;
+}
+
+int Champion::getY()
+{
+    return y;
+}
+
+void Champion::setX(int x)
+{
+    if (x < 10 || x >= 0)
+        this->x = x;
+}
+
+void Champion::setY(int y)
+{
+    if (y < 10 || y >= 0)
+        this->y = y;
+}
+
+void Champion::setLocation(int x, int y)
+{
+    if (x < 10 || x >= 0)
+        this->x = x;
+    if (y < 10 || y >= 0)
+        this->y = y;
+}
+
+char Champion::getName()
+{
+    return name;
 }
 
 int Champion::getCurrentHP()
@@ -27,16 +63,6 @@ void Champion::setCurrentHP(int hp)
         this->currentHP = hp;
 }
 
-Point Champion::getLocation()
-{
-    return *location;
-}
-
-void Champion::setLocation(Point *p)
-{
-    location = p;
-}
-
 int Champion::getNumOfGems()
 {
     return gemsCollected;
@@ -52,5 +78,5 @@ void Champion::setNumOfGems(int gems)
 
 void Champion::printChampionInfo()
 {
-    cout << "Name: " << name << "\nLocation: " << location->getX() << ", " << location->getY() << "\nGems Collected: " << gemsCollected << endl;
+    cout << "Location: " << getX() << ", " << getY() << "\nGems Collected: " << gemsCollected << "\nHP: " << currentHP << "\nScore: " << gemsCollected * 10 << endl;
 }

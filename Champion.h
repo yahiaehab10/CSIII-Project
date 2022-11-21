@@ -1,6 +1,5 @@
-#ifndef Champion_H_Included
-#define Champion_H_Included
-// #include "Point.h"
+#ifndef CHAMPION_H_INCLUDED
+#define CHAMPION_H_INCLUDED
 
 using namespace std;
 

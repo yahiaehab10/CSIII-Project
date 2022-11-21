@@ -1,31 +1,30 @@
 #include <bits/stdc++.h>
 #include "Map.h"
-#include "Champion.h"
 #include "Engine.h"
 
 using namespace std;
 
-Map::Map(Champion *champ)
+Map::Map(Champion *champ, Engine *engine)
 {
     map = new char *[10]; // allocates 10 rows as pointers
 
     for (int i = 0; i < 10; i++) // allocates 10 columns per row
         map[i] = new char[10];
 
-    randomiseMap(champ);
-    // printMap();
+    randomiseMap(champ, engine);
 }
 
-void Map::randomiseMap(Champion *champ)
+void Map::setCell(int x, int y, char c)
+{
+    map[x][y] = c;
+}
+
+void Map::randomiseMap(Champion *champ, Engine *engine)
 {
 
     for (int i = 0; i < 10; i++)
-    {
         for (int j = 0; j < 10; j++)
-        {
             map[i][j] = 'O';
-        }
-    }
 
     map[9][0] = champ->getName();
 
@@ -61,10 +60,12 @@ void Map::randomiseMap(Champion *champ)
     if (n == 2)
     {
         system("CLS");
-        randomiseMap(champ);
+        randomiseMap(champ, engine);
     }
     else if (n == 1)
-        Engine *e = new Engine(champ);
+    {
+        engine->controller(champ);
+    }
     else
         cout << "Invalid Input!";
 }
@@ -74,9 +75,8 @@ void Map::printMap()
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
-        {
             cout << map[i][j] << ' ';
-        }
+
         cout << "\n";
     }
 }

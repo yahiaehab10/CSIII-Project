@@ -25,21 +25,21 @@ int Champion::getY()
 
 void Champion::setX(int x)
 {
-    if (x < 10 || x >= 0)
+    if (x < 10 && x >= 0)
         this->x = x;
 }
 
 void Champion::setY(int y)
 {
-    if (y < 10 || y >= 0)
+    if (y < 10 && y >= 0)
         this->y = y;
 }
 
 void Champion::setLocation(int x, int y)
 {
-    if (x < 10 || x >= 0)
+    if (x < 10 && x >= 0)
         this->x = x;
-    if (y < 10 || y >= 0)
+    if (y < 10 && y >= 0)
         this->y = y;
 }
 

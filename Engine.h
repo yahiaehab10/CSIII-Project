@@ -2,6 +2,7 @@
 #define ENGINE_H_INCLUDED
 
 #include "Map.h"
+#include "Champion.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ public:
     Engine();
     void controller(Champion *champ);
     void update(Champion *champ);
+    Map *getMap();
     ~Engine();
 };
 

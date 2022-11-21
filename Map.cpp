@@ -1,40 +1,46 @@
 #include <bits/stdc++.h>
 #include "Map.h"
-#include "Engine.h"
+#include "Champion.h"
 
 using namespace std;
 
-Map::Map(Champion *champ, Engine *engine)
+Map::Map()
 {
+    c = new Champion();
     map = new char *[10]; // allocates 10 rows as pointers
 
     for (int i = 0; i < 10; i++) // allocates 10 columns per row
         map[i] = new char[10];
 
-    randomiseMap(champ, engine);
+    randomiseMap(c);
 }
 
 void Map::setCell(int x, int y, char c)
 {
-    map[x][y] = c;
+    map[y][x] = c;
 }
 
-void Map::randomiseMap(Champion *champ, Engine *engine)
+Champion *Map::getChampion()
+{
+    return c;
+}
+
+void Map::randomiseMap(Champion *champ)
 {
 
     for (int i = 0; i < 10; i++)
         for (int j = 0; j < 10; j++)
-            map[i][j] = 'O';
+            map[j][i] = 'O';
 
-    map[9][0] = champ->getName();
+    map[champ->getY()][champ->getX()] = champ->getName();
 
     for (int i = 0; i < 20; i++) // obstacle creation
     {
         int x = rand() % 10;
         int y = rand() % 10;
 
-        if (map[x][y] == 'O') // == null?
-            map[x][y] = 'x';
+        if (map[y][x] == 'O') // == null?
+            map[y][x] = 'x';
         else
             i--;
     }
@@ -44,30 +50,13 @@ void Map::randomiseMap(Champion *champ, Engine *engine)
         int x = rand() % 10;
         int y = rand() % 10;
 
-        if (map[x][y] == 'O') // == null?
-            map[x][y] = 'G';
+        if (map[y][x] == 'O') // == null?
+            map[y][x] = 'G';
         else
             i--;
     }
 
     printMap();
-    champ->printChampionInfo();
-
-    int n;
-    cout << "Enter 2 to re-randomise OR enter 1 to start the game: ";
-    cin >> n;
-
-    if (n == 2)
-    {
-        system("CLS");
-        randomiseMap(champ, engine);
-    }
-    else if (n == 1)
-    {
-        engine->controller(champ);
-    }
-    else
-        cout << "Invalid Input!";
 }
 
 void Map::printMap()
@@ -75,7 +64,7 @@ void Map::printMap()
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
-            cout << map[i][j] << ' ';
+            cout << map[j][i] << ' ';
 
         cout << "\n";
     }
@@ -83,5 +72,10 @@ void Map::printMap()
 
 char Map::objectAt(int x, int y)
 {
-    return map[x][y];
+    return map[y][x];
+}
+
+Map *Map::getMap()
+{
+    return this;
 }

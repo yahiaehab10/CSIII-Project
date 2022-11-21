@@ -20,10 +20,11 @@ void Engine::controller(Champion *champ)
 {
     while (champ->getCurrentHP() > 0 && champ->getNumOfGems() < 40)
     {
+        map->setCell(champ->getX(), champ->getY(), 'O');
         int direction = getch();
         if (direction == 56) // 8
         {
-            champ->setLocation(champ->getX() - 1, champ->getY());
+            champ->setLocation(champ->getX() + 1, champ->getY());
             update(champ);
         }
         else if (direction == 54) // 6
@@ -33,7 +34,7 @@ void Engine::controller(Champion *champ)
         }
         else if (direction == 53) // 5
         {
-            champ->setLocation(champ->getX() + 1, champ->getY());
+            champ->setLocation(champ->getX() - 1, champ->getY());
             update(champ);
         }
         else if (direction == 52) // 4
@@ -41,7 +42,6 @@ void Engine::controller(Champion *champ)
             champ->setLocation(champ->getX(), champ->getY() - 1);
             update(champ);
         }
-        map->setCell(champ->getX(), champ->getY(), 'O');
     }
 }
 
@@ -54,7 +54,6 @@ void Engine::update(Champion *champ)
         champ->setCurrentHP(champ->getCurrentHP() - 40);
 
     map->setCell(champ->getX(), champ->getY(), 'M');
-    system("CLS");
     map->printMap();
     champ->printChampionInfo();
 }
@@ -63,21 +62,22 @@ int main()
 {
     Engine *e = new Engine();
     Champion *champ = e->getMap()->getChampion();
-    e->getMap()->randomiseMap(champ);
 
     int n;
 
     do
     {
-        system("CLS");
         e->getMap()->randomiseMap(champ);
         cout << "Enter 2 to re-randomise OR enter 1 to start the game: ";
         cin >> n;
+        if (n == 1)
+        {
+            e->getMap()->setCell(0, 0, champ->getName());
+            e->getMap()->printMap();
+            champ->printChampionInfo();
+            e->controller(champ);
+        }
     } while (n == 2);
 
-    if (n == 1)
-        e->controller(champ);
-    else
-        cout << "Invalid Input!";
     return 0;
 }

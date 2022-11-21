@@ -78,5 +78,5 @@ void Champion::setNumOfGems(int gems)
 
 void Champion::printChampionInfo()
 {
-    cout << "Location: " << getX() << ", " << getY() << "\nGems Collected: " << gemsCollected << "\nHP: " << currentHP << "\nScore: " << gemsCollected * 10 << endl;
+    cout << "Location: " << y << ", " << x << "\nGems Collected: " << gemsCollected << "\nHP: " << currentHP << "\nScore: " << gemsCollected * 10 << endl;
 }

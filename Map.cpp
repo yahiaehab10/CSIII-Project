@@ -17,7 +17,7 @@ Map::Map()
 
 void Map::setCell(int x, int y, char c)
 {
-    map[y][x] = c;
+    map[x][y] = c;
 }
 
 Champion *Map::getChampion()
@@ -30,17 +30,15 @@ void Map::randomiseMap(Champion *champ)
 
     for (int i = 0; i < 10; i++)
         for (int j = 0; j < 10; j++)
-            map[j][i] = 'O';
-
-    map[champ->getY()][champ->getX()] = champ->getName();
+            map[i][j] = 'O';
 
     for (int i = 0; i < 20; i++) // obstacle creation
     {
         int x = rand() % 10;
         int y = rand() % 10;
 
-        if (map[y][x] == 'O') // == null?
-            map[y][x] = 'x';
+        if (map[x][y] == 'O' && !(x == 0 && y == 0))
+            map[x][y] = 'x';
         else
             i--;
     }
@@ -50,8 +48,8 @@ void Map::randomiseMap(Champion *champ)
         int x = rand() % 10;
         int y = rand() % 10;
 
-        if (map[y][x] == 'O') // == null?
-            map[y][x] = 'G';
+        if (map[x][y] == 'O' && !(x == 0 && y == 0))
+            map[x][y] = 'G';
         else
             i--;
     }
@@ -61,10 +59,11 @@ void Map::randomiseMap(Champion *champ)
 
 void Map::printMap()
 {
-    for (int i = 0; i < 10; i++)
+    system("CLS");
+    for (int i = 9; i >= 0; i--)
     {
         for (int j = 0; j < 10; j++)
-            cout << map[j][i] << ' ';
+            cout << map[i][j] << ' ';
 
         cout << "\n";
     }
@@ -72,10 +71,10 @@ void Map::printMap()
 
 char Map::objectAt(int x, int y)
 {
-    return map[y][x];
+    return map[x][y];
 }
 
-Map *Map::getMap()
-{
-    return this;
-}
+// Map *Map::getMap()
+// {
+//     return this;
+// }

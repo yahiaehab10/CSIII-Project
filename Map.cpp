@@ -1,18 +1,16 @@
 #include <bits/stdc++.h>
 #include "Map.h"
-#include "Champion.h"
 
 using namespace std;
 
 Map::Map()
 {
-    c = new Champion();
     map = new char *[10]; // allocates 10 rows as pointers
 
     for (int i = 0; i < 10; i++) // allocates 10 columns per row
         map[i] = new char[10];
 
-    randomiseMap(c);
+    randomiseMap();
 }
 
 void Map::setCell(int x, int y, char c)
@@ -20,12 +18,7 @@ void Map::setCell(int x, int y, char c)
     map[x][y] = c;
 }
 
-Champion *Map::getChampion()
-{
-    return c;
-}
-
-void Map::randomiseMap(Champion *champ)
+void Map::randomiseMap()
 {
 
     for (int i = 0; i < 10; i++)
@@ -74,7 +67,7 @@ char Map::objectAt(int x, int y)
     return map[x][y];
 }
 
-// Map *Map::getMap()
-// {
-//     return this;
-// }
+Map::~Map()
+{
+    delete(map);
+}

@@ -22,7 +22,6 @@ public:
     int getNumOfGems();
     void setNumOfGems(int gems);
     void printChampionInfo();
-    ~Champion();
 };
 
 #endif

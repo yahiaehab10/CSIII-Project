@@ -58,16 +58,27 @@ void Engine::update(Champion *champ)
     champ->printChampionInfo();
 }
 
+Champion *Engine::getChampion()
+{
+    return c;
+}
+
+Engine::~Engine()
+{
+    delete (c);
+    delete (map);
+}
+
 int main()
 {
     Engine *e = new Engine();
-    Champion *champ = e->getMap()->getChampion();
+    Champion *champ = e->getChampion();
 
     int n;
 
     do
     {
-        e->getMap()->randomiseMap(champ);
+        e->getMap()->randomiseMap();
         cout << "Enter 2 to re-randomise OR enter 1 to start the game: ";
         cin >> n;
         if (n == 1)

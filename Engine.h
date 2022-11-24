@@ -17,6 +17,7 @@ public:
     void controller(Champion *champ);
     void update(Champion *champ);
     Map *getMap();
+    Champion *getChampion();
     ~Engine();
 };
 

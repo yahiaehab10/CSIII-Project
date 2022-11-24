@@ -89,7 +89,7 @@ int main()
             champ->printChampionInfo();
             e->controller();
         }
-    } while (n == 2);
+    } while (n == 2 || n != 1); // BUGS OUT AND INFINITELY LOOPS WHEN THE USER ENTERS A CHARACTER
 
     // delete(map);
     // delete(champ);

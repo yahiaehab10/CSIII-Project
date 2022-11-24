@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <conio.h>
+#include "windows.h"
 
 #include "Engine.h"
 #include "Map.h"
@@ -24,6 +25,7 @@ Champion *Engine::getChampion()
 
 void Engine::controller()
 {
+    PlaySound(TEXT("Resources/Theme.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
     while (c->getCurrentHP() > 0 && c->getNumOfGems() < 40)
     {
         map->setCell(c->getX(), c->getY(), 'O');
@@ -45,9 +47,15 @@ void Engine::controller()
     }
 
     if (c->getNumOfGems() == 40)
+    {
         cout << "You Won! :D" << endl;
+        PlaySound(TEXT("Resources/Win.wav"), NULL, SND_FILENAME);
+    }
     else if (c->getCurrentHP() == 0)
+    {
         cout << "You Lost! D:" << endl;
+        PlaySound(TEXT("Resources/Death.wav"), NULL, SND_FILENAME);
+    }
 }
 
 void Engine::update()

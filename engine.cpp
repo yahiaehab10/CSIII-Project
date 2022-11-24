@@ -44,9 +44,9 @@ void Engine::controller()
         update();
     }
 
-    if (c->getNumOfGems == 40)
+    if (c->getNumOfGems() == 40)
         cout << "You Won! :D" << endl;
-    else if (c->getCurrentHP == 0)
+    else if (c->getCurrentHP() == 0)
         cout << "You Lost! D:" << endl;
 }
 

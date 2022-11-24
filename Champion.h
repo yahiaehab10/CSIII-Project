@@ -1,8 +1,6 @@
 #ifndef CHAMPION_H_INCLUDED
 #define CHAMPION_H_INCLUDED
 
-using namespace std;
-
 class Champion
 {
 private:

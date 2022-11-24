@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 #include "Map.h"
 
 using namespace std;
@@ -69,5 +70,5 @@ char Map::objectAt(int x, int y)
 
 Map::~Map()
 {
-    delete(map);
+    delete (map);
 }

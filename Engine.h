@@ -4,8 +4,6 @@
 #include "Map.h"
 #include "Champion.h"
 
-using namespace std;
-
 class Engine
 {
 private:
@@ -14,8 +12,8 @@ private:
 
 public:
     Engine();
-    void controller(Champion *champ);
-    void update(Champion *champ);
+    void controller();
+    void update();
     Map *getMap();
     Champion *getChampion();
     ~Engine();

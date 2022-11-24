@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <conio.h>
+
 #include "Engine.h"
 #include "Map.h"
 
@@ -16,51 +17,50 @@ Map *Engine::getMap()
     return map;
 }
 
-void Engine::controller(Champion *champ)
-{
-    while (champ->getCurrentHP() > 0 && champ->getNumOfGems() < 40)
-    {
-        map->setCell(champ->getX(), champ->getY(), 'O');
-        int direction = getch();
-        if (direction == 56) // 8
-        {
-            champ->setLocation(champ->getX() + 1, champ->getY());
-            update(champ);
-        }
-        else if (direction == 54) // 6
-        {
-            champ->setLocation(champ->getX(), champ->getY() + 1);
-            update(champ);
-        }
-        else if (direction == 53) // 5
-        {
-            champ->setLocation(champ->getX() - 1, champ->getY());
-            update(champ);
-        }
-        else if (direction == 52) // 4
-        {
-            champ->setLocation(champ->getX(), champ->getY() - 1);
-            update(champ);
-        }
-    }
-}
-
-void Engine::update(Champion *champ)
-{
-    if (map->objectAt(champ->getX(), champ->getY()) == 'G')
-        champ->setNumOfGems(champ->getNumOfGems() + 1);
-
-    else if (map->objectAt(champ->getX(), champ->getY()) == 'x')
-        champ->setCurrentHP(champ->getCurrentHP() - 40);
-
-    map->setCell(champ->getX(), champ->getY(), 'M');
-    map->printMap();
-    champ->printChampionInfo();
-}
-
 Champion *Engine::getChampion()
 {
     return c;
+}
+
+void Engine::controller()
+{
+    while (c->getCurrentHP() > 0 && c->getNumOfGems() < 40)
+    {
+        map->setCell(c->getX(), c->getY(), 'O');
+        int direction = getch();
+
+        if (direction == 56) // 8
+            c->setLocation(c->getX() + 1, c->getY());
+
+        else if (direction == 54) // 6
+            c->setLocation(c->getX(), c->getY() + 1);
+
+        else if (direction == 53) // 5
+            c->setLocation(c->getX() - 1, c->getY());
+
+        else if (direction == 52) // 4
+            c->setLocation(c->getX(), c->getY() - 1);
+
+        update();
+    }
+
+    if (c->getNumOfGems == 40)
+        cout << "You Won! :D" << endl;
+    else if (c->getCurrentHP == 0)
+        cout << "You Lost! D:" << endl;
+}
+
+void Engine::update()
+{
+    if (map->objectAt(c->getX(), c->getY()) == 'G')
+        c->setNumOfGems(c->getNumOfGems() + 1);
+
+    else if (map->objectAt(c->getX(), c->getY()) == 'x')
+        c->setCurrentHP(c->getCurrentHP() - 40);
+
+    map->setCell(c->getX(), c->getY(), 'M');
+    map->printMap();
+    c->printChampionInfo();
 }
 
 Engine::~Engine()
@@ -73,22 +73,26 @@ int main()
 {
     Engine *e = new Engine();
     Champion *champ = e->getChampion();
+    Map *map = e->getMap();
 
     int n;
 
     do
     {
-        e->getMap()->randomiseMap();
+        map->randomiseMap();
         cout << "Enter 2 to re-randomise OR enter 1 to start the game: ";
         cin >> n;
         if (n == 1)
         {
-            e->getMap()->setCell(0, 0, champ->getName());
-            e->getMap()->printMap();
+            map->setCell(0, 0, champ->getName());
+            map->printMap();
             champ->printChampionInfo();
-            e->controller(champ);
+            e->controller();
         }
     } while (n == 2);
+
+    // delete(map);
+    // delete(champ);
 
     return 0;
 }

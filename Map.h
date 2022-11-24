@@ -1,8 +1,6 @@
 #ifndef MAP_H_INCLUDED
 #define MAP_H_INCLUDED
 
-using namespace std;
-
 class Map
 {
 private:

@@ -12,6 +12,7 @@ private:
 
 public:
     Engine();
+    void chooseChampion();
     void controller();
     void update();
     Map *getMap();

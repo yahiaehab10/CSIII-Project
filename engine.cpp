@@ -9,8 +9,20 @@ using namespace std;
 
 Engine::Engine()
 {
-    c = new Champion();
+    this->chooseChampion();
     map = new Map();
+}
+
+void Engine::chooseChampion()
+{
+    cout << "Choose your champion (M for Mario, L for Luigi): " << endl;
+    int input = getch();
+    if (input == 77 || input == 109) // 77 and 109 is M in ASCII
+        this->c = new Mario();
+    else if (input == 76 || input == 108) // 76 and 108 is L in ASCII
+        this->c = new Luigi();
+
+    system("cls");
 }
 
 Map *Engine::getMap()
@@ -28,88 +40,73 @@ void Engine::controller()
     PlaySound(TEXT("Resources/Theme.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
     while (c->getCurrentHP() > 0 && c->getNumOfGems() < 40)
     {
-        int ability = getch();
-        if ((ability == 120 || ability == 88) && c->remainingAbilityMoves != 0) // 120 and 88 is X on ascii
+        int input = getch();
+        if ((input == 120 || input == 88) && c->getRemainingAbilityMoves() > 0) // 120 and 88 is X in ASCII
         {
-            int direction = getch();
-            if (c->getName() == 'M')
-            {
-                map->setCell(c->getX(), c->getY(), 'O');
-                int direction = getch();
-
-                if (direction == 56) // 8
-                    c->setLocation(c->getX() + 2, c->getY());
-
-                else if (direction == 54) // 6
-                    c->setLocation(c->getX(), c->getY() + 2);
-
-                else if (direction == 53) // 5
-                    c->setLocation(c->getX() - 2, c->getY());
-
-                else if (direction == 52) // 4
-                    c->setLocation(c->getX(), c->getY() - 2);
-            }
-            else
+            map->setCell(c->getX(), c->getY(), 'O');
+            c->useAbility();
+            if (c->getName() == 'L')
             {
                 int direction = getch();
-                if (direction == 56)
+                if (direction == 54)
                 {
                     int curr = c->getY() + 1;
-                    while (curr != 9)
+                    while (curr <= 9)
                     {
-                        if (curr != 'G' && curr != 'O')
+                        if (map->objectAt(c->getX(), curr) == 'x')
                             map->setCell(c->getX(), curr, 'O');
-                        curr++;
-                    }
-                }
-                else if (direction == 53)
-                {
-                    int curr = c->getY() - 1;
-                    while (curr != 0)
-                    {
-                        if (curr != 'G' && curr != 'O')
-                            map->setCell(c->getX(), curr, 'O');
-                        curr--;
-                    }
-                }
-                else if (direction == 54)
-                {
-                    int curr = c->getX() + 1;
-                    while (curr != 9)
-                    {
-                        if (curr != 'G' && curr != 'O')
-                            map->setCell(curr, c->getY(), 'O');
                         curr++;
                     }
                 }
                 else if (direction == 52)
                 {
-                    int curr = c->getX() - 1;
-                    while (curr != 0)
+                    int curr = c->getY() - 1;
+                    while (curr >= 0)
                     {
-                        if (curr != 'G' && curr != 'O')
+                        if (map->objectAt(c->getX(), curr) == 'x')
+                            map->setCell(c->getX(), curr, 'O');
+                        curr--;
+                    }
+                }
+                else if (direction == 56)
+                {
+                    int curr = c->getX() + 1;
+                    while (curr <= 9)
+                    {
+                        if (map->objectAt(curr, c->getY()) == 'x')
+                            map->setCell(curr, c->getY(), 'O');
+                        curr++;
+                    }
+                }
+                else if (direction == 53)
+                {
+                    int curr = c->getX() - 1;
+                    while (curr >= 0)
+                    {
+                        if (map->objectAt(curr, c->getY()) == 'x')
                             map->setCell(curr, c->getY(), 'O');
                         curr--;
                     }
                 }
+
+                c->setRemainingAbilityMoves(c->getRemainingAbilityMoves() - 1);
             }
-            c->remainingAbilityMoves--;
         }
+
         else
         {
             map->setCell(c->getX(), c->getY(), 'O');
-            int direction = getch();
 
-            if (direction == 56) // 8
+            if (input == 56) // 8
                 c->setLocation(c->getX() + 1, c->getY());
 
-            else if (direction == 54) // 6
+            else if (input == 54) // 6
                 c->setLocation(c->getX(), c->getY() + 1);
 
-            else if (direction == 53) // 5
+            else if (input == 53) // 5
                 c->setLocation(c->getX() - 1, c->getY());
 
-            else if (direction == 52) // 4
+            else if (input == 52) // 4
                 c->setLocation(c->getX(), c->getY() - 1);
         }
         update();
@@ -131,15 +128,10 @@ void Engine::update()
 {
     if (map->objectAt(c->getX(), c->getY()) == 'G')
         c->setNumOfGems(c->getNumOfGems() + 1);
-
     else if (map->objectAt(c->getX(), c->getY()) == 'x')
         c->setCurrentHP(c->getCurrentHP() - 40);
 
-    if (c->getName() == 'M')
-        map->setCell(c->getX(), c->getY(), 'M');
-    else
-        map->setCell(c->getX(), c->getY(), 'L');
-
+    map->setCell(c->getX(), c->getY(), c->getName());
     map->printMap();
     c->printChampionInfo();
 }
@@ -172,8 +164,7 @@ int main()
         }
     } while (n == 2 || n != 1); // BUGS OUT AND INFINITELY LOOPS WHEN THE USER ENTERS A CHARACTER
 
-    // delete(map);
-    // delete(champ);
+    delete (e);
 
     return 0;
 }

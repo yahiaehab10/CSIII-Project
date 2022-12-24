@@ -5,11 +5,11 @@ class Champion
 {
 private:
     char name;
-    int maxHP, currentHP, gemsCollected, x, y;
+    int maxHP, currentHP, gemsCollected, x, y, remainingAbilityMoves;
 
 public:
     Champion();
-    char getName();
+    virtual char getName();
     int getCurrentHP();
     void setCurrentHP(int hp);
     int getX();
@@ -20,22 +20,36 @@ public:
     int getNumOfGems();
     void setNumOfGems(int gems);
     void printChampionInfo();
-    virtual void useAbility() ;
-    static int remainingAbilityMoves = 2;
+    virtual void useAbility();
+    int getRemainingAbilityMoves();
+    void setRemainingAbilityMoves(int x);
 };
-class Mario : public Champion
+
+class Mario : virtual public Champion
 {
+private:
+    char name;
+    int maxHP, currentHP, gemsCollected, x, y, remainingAbilityMoves;
 
 public:
     Mario();
     void useAbility();
+    char getName();
+    // void printChampionInfo();
     ~Mario();
 };
-class Luigi : public Champion
+
+class Luigi : virtual public Champion
 {
+private:
+    char name;
+    int maxHP, currentHP, gemsCollected, x, y, remainingAbilityMoves;
+
 public:
-    Luigi(/* args */) {}
+    Luigi();
     void useAbility();
+    char getName();
+    // void printChampionInfo();
     ~Luigi();
 };
 

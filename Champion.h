@@ -20,6 +20,23 @@ public:
     int getNumOfGems();
     void setNumOfGems(int gems);
     void printChampionInfo();
+    virtual void useAbility() ;
+    static int remainingAbilityMoves = 2;
+};
+class Mario : public Champion
+{
+
+public:
+    Mario();
+    void useAbility();
+    ~Mario();
+};
+class Luigi : public Champion
+{
+public:
+    Luigi(/* args */) {}
+    void useAbility();
+    ~Luigi();
 };
 
 #endif

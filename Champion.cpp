@@ -81,3 +81,17 @@ void Champion::printChampionInfo()
 {
     cout << "Location: " << y << ", " << x << "\nGems Collected: " << gemsCollected << "\nHP: " << currentHP << "\nScore: " << gemsCollected * 10 << endl;
 }
+
+virtual void Champion::useAbility()
+{
+    cout << "Abilty X is called" << endl;
+}
+
+void Mario::useAbility()
+{
+    cout << "Mario ability is called" << endl;
+}
+void Luigi ::useAbility()
+{
+    cout << "Luigi Ability is called" << endl;
+}

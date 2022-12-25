@@ -26,6 +26,15 @@ Map* Map::getMap()
 
 void Map::randomiseMap()
 {
+    for (int i = 0; i < 10; i++) // initialises the board
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            Cell *temp = new Cell('.', i, j);
+            board[i][j] = *temp;
+        }
+    }
+
     for (int i = 0; i < 10; i++) // bomb creation
     {
         int x = rand() % 10;
@@ -33,12 +42,26 @@ void Map::randomiseMap()
 
         if (board[x][y].getName() == '.' && !(x == 0 && y == 0))
         {
-            Bomb *temp = new Bomb(x, y);
+            Cell *temp = new Bomb(x, y);
             board[x][y] = *temp;
         }
         else
             i--;
     }
+
+    // for (int i = 0; i < 10; i++) // bomb creation
+    // {
+    //     int x = rand() % 10;
+    //     int y = rand() % 10;
+
+    //     if (board[x][y].getName() == '.' && !(x == 0 && y == 0))
+    //     {
+    //         Obstacle *temp = new Obstacle('x', x, y);
+    //         board[x][y] = *temp;
+    //     }
+    //     else
+    //         i--;
+    // }
 
 
     for (int i = 0; i < 40; i++) // gem placement

@@ -79,7 +79,7 @@ public:
 
 #pragma region ObstacleChildren
 
-class Bomb : virtual public Obstacle
+class Bomb : public Obstacle
 {
 private:
     char name;
@@ -91,7 +91,7 @@ public:
     ~Bomb();
 };
 
-class Thief : virtual public Obstacle
+class Thief : public Obstacle
 {
 private:
     char name;
@@ -119,7 +119,7 @@ public:
 
 #pragma region GemChildren
 
-class Coin : virtual public Gem
+class Coin : public Gem
 {
 private:
     char name;
@@ -130,7 +130,7 @@ public:
     ~Coin();
 };
 
-class Potion : virtual public Gem
+class Potion : public Gem
 {
 private:
     char name;

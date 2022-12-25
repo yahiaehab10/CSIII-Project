@@ -67,6 +67,11 @@ Potion::Potion(int x, int y) : Gem(x, y)
 {
 }
 
+void Gem::execute(Champion *champ)
+{
+    cout << "Gem is executed with amount: " << this->amount << endl;
+}
+
 void Coin::execute(Champion *champ)
 {
     cout << "Coin is executed with amount: " << this->amount << endl;
@@ -207,4 +212,40 @@ int Champion::getRemainingAbilityMoves()
 void Champion::setRemainingAbilityMoves(int x)
 {
     this->remainingAbilityMoves = x;
+}
+
+Cell::~Cell()
+{
+}
+
+Gem::~Gem()
+{
+}
+
+Coin::~Coin()
+{
+}
+
+Potion::~Potion()
+{
+}
+
+Obstacle::~Obstacle()
+{
+}
+
+Bomb::~Bomb()
+{
+}
+
+Thief::~Thief()
+{
+}
+
+Mario::~Mario()
+{
+}
+
+Luigi::~Luigi()
+{
 }

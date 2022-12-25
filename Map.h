@@ -12,9 +12,9 @@ public:
     Map();
     Map *getMap();
     void randomiseMap();
-    void setCell(int x, int y, Cell c);
+    void setCell(int x, int y, Cell *c);
     void printMap();
-    Cell objectAt(int x, int y);
+    Cell *objectAt(int x, int y);
     ~Map();
 };
 

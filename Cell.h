@@ -1,7 +1,6 @@
 #ifndef CELL_H_INCLUDED
 #define CELL_H_INCLUDED
 
-
 class Cell
 {
 private:
@@ -37,6 +36,8 @@ public:
     void setRemainingAbilityMoves(int x);
 };
 
+#pragma region ChampionChildren
+
 class Mario : virtual public Champion
 {
 private:
@@ -60,6 +61,8 @@ public:
     void useAbility();
     ~Luigi();
 };
+
+#pragma endregion
 
 class Obstacle : virtual public Cell
 {

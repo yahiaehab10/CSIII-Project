@@ -2,7 +2,6 @@
 #define ENGINE_H_INCLUDED
 
 #include "Map.h"
-#include "Champion.h"
 
 class Engine
 {

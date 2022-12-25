@@ -6,48 +6,68 @@ using namespace std;
 
 Map::Map()
 {
-    map = new char *[10]; // allocates 10 rows as pointers
+    board = new Cell *[10]; // allocates 10 rows as pointers
 
     for (int i = 0; i < 10; i++) // allocates 10 columns per row
-        map[i] = new char[10];
+        board[i] = new Cell[10];
 
     randomiseMap();
 }
 
-void Map::setCell(int x, int y, char c)
+void Map::setCell(int x, int y, Cell *c)
 {
-    map[x][y] = c;
+    board[x][y] = *c;
+}
+
+Map* Map::getMap()
+{
+    return this;
 }
 
 void Map::randomiseMap()
 {
-
-    for (int i = 0; i < 10; i++)
-        for (int j = 0; j < 10; j++)
-            map[i][j] = 'O';
-
-    for (int i = 0; i < 20; i++) // obstacle creation
+    for (int i = 0; i < 10; i++) // bomb creation
     {
         int x = rand() % 10;
         int y = rand() % 10;
 
-        if (map[x][y] == 'O' && !(x == 0 && y == 0))
-            map[x][y] = 'x';
+        if (board[x][y].getName() == '.' && !(x == 0 && y == 0))
+        {
+            Bomb *temp = new Bomb(x, y);
+            board[x][y] = *temp;
+        }
         else
             i--;
     }
+
 
     for (int i = 0; i < 40; i++) // gem placement
     {
         int x = rand() % 10;
         int y = rand() % 10;
 
-        if (map[x][y] == 'O' && !(x == 0 && y == 0))
-            map[x][y] = 'G';
+        if (board[x][y].getName() == '.' && !(x == 0 && y == 0))
+        {
+            Gem *temp = new Gem(x, y);
+            board[x][y] = *temp;
+        }
         else
             i--;
     }
 
+    for (int i = 0; i < 10; i++) // thief creation
+    {
+        int x = rand() % 10;
+        int y = rand() % 10;
+
+        if (board[x][y].getName() == '.' && !(x == 0 && y == 0))
+        {
+            Thief *temp = new Thief(x, y);
+            board[x][y] = *temp;
+        }
+        else
+            i--;
+    }
     printMap();
 }
 
@@ -57,18 +77,18 @@ void Map::printMap()
     for (int i = 9; i >= 0; i--)
     {
         for (int j = 0; j < 10; j++)
-            cout << map[i][j] << ' ';
+            cout << board[i][j].getName() << ' ';
 
         cout << "\n";
     }
 }
 
-char Map::objectAt(int x, int y)
+Cell *Map::objectAt(int x, int y)
 {
-    return map[x][y];
+    return &board[x][y];
 }
 
 Map::~Map()
 {
-    delete (map);
+    delete (board);
 }

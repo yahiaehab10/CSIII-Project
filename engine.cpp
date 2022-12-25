@@ -3,7 +3,6 @@
 #include "windows.h"
 
 #include "Engine.h"
-#include "Map.h"
 
 using namespace std;
 
@@ -22,7 +21,7 @@ void Engine::chooseChampion()
     else if (input == 76 || input == 108) // 76 and 108 is L in ASCII
         this->c = new Luigi();
 
-    system("cls");
+    system("CLS");
 }
 
 Map *Engine::getMap()
@@ -43,7 +42,7 @@ void Engine::controller()
         int input = getch();
         if ((input == 120 || input == 88) && c->getRemainingAbilityMoves() > 0) // 120 and 88 is X in ASCII
         {
-            map->setCell(c->getX(), c->getY(), 'O');
+            map->setCell(c->getX(), c->getY(), new Cell('.', c->getX(), c->getY()));
             c->useAbility();
             if (c->getName() == 'L')
             {
@@ -53,8 +52,8 @@ void Engine::controller()
                     int curr = c->getY() + 1;
                     while (curr <= 9)
                     {
-                        if (map->objectAt(c->getX(), curr) == 'x')
-                            map->setCell(c->getX(), curr, 'O');
+                        if (map->objectAt(c->getX(), curr)->getName() == 'x')
+                            map->setCell(c->getX(), curr, new Cell('.', c->getX(), c->getY()));
                         curr++;
                     }
                 }
@@ -63,8 +62,8 @@ void Engine::controller()
                     int curr = c->getY() - 1;
                     while (curr >= 0)
                     {
-                        if (map->objectAt(c->getX(), curr) == 'x')
-                            map->setCell(c->getX(), curr, 'O');
+                        if (map->objectAt(c->getX(), curr)->getName() == 'x')
+                            map->setCell(c->getX(), curr, new Cell('.', c->getX(), c->getY()));
                         curr--;
                     }
                 }
@@ -73,8 +72,8 @@ void Engine::controller()
                     int curr = c->getX() + 1;
                     while (curr <= 9)
                     {
-                        if (map->objectAt(curr, c->getY()) == 'x')
-                            map->setCell(curr, c->getY(), 'O');
+                        if (map->objectAt(curr, c->getY())->getName() == 'x')
+                            map->setCell(curr, c->getY(), new Cell('.', c->getX(), c->getY()));
                         curr++;
                     }
                 }
@@ -83,8 +82,8 @@ void Engine::controller()
                     int curr = c->getX() - 1;
                     while (curr >= 0)
                     {
-                        if (map->objectAt(curr, c->getY()) == 'x')
-                            map->setCell(curr, c->getY(), 'O');
+                        if (map->objectAt(curr, c->getY())->getName() == 'x')
+                            map->setCell(curr, c->getY(), new Cell('.', c->getX(), c->getY()));
                         curr--;
                     }
                 }
@@ -94,7 +93,7 @@ void Engine::controller()
         }
         else
         {
-            map->setCell(c->getX(), c->getY(), 'O');
+            map->setCell(c->getX(), c->getY(), new Cell('.', c->getX(), c->getY()));
 
             if (input == 56) // 8
                 c->setLocation(c->getX() + 1, c->getY());
@@ -125,12 +124,12 @@ void Engine::controller()
 
 void Engine::update()
 {
-    if (map->objectAt(c->getX(), c->getY()) == 'G')
+    if (map->objectAt(c->getX(), c->getY())->getName() == 'G')
         c->setNumOfGems(c->getNumOfGems() + 1);
-    else if (map->objectAt(c->getX(), c->getY()) == 'x')
+    else if (map->objectAt(c->getX(), c->getY())->getName() == 'x')
         c->setCurrentHP(c->getCurrentHP() - 40);
 
-    map->setCell(c->getX(), c->getY(), c->getName());
+    map->setCell(c->getX(), c->getY(), c);
     map->printMap();
     cout << c->getName() << endl;
     c->printChampionInfo();
@@ -157,7 +156,7 @@ int main()
         cin >> n;
         if (n == 1)
         {
-            map->setCell(0, 0, champ->getName());
+            map->setCell(0, 0, champ);
             map->printMap();
             champ->printChampionInfo();
             e->controller();

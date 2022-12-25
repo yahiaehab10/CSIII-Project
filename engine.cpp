@@ -92,7 +92,6 @@ void Engine::controller()
                 c->setRemainingAbilityMoves(c->getRemainingAbilityMoves() - 1);
             }
         }
-
         else
         {
             map->setCell(c->getX(), c->getY(), 'O');
@@ -133,6 +132,7 @@ void Engine::update()
 
     map->setCell(c->getX(), c->getY(), c->getName());
     map->printMap();
+    cout << c->getName() << endl;
     c->printChampionInfo();
 }
 

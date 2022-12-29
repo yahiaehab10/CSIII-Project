@@ -6,7 +6,7 @@
 class Map
 {
 private:
-    Cell **board;
+    Cell* **board;
 
 public:
     Map();

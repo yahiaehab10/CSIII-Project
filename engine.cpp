@@ -42,7 +42,7 @@ void Engine::controller()
         int input = getch();
         if ((input == 120 || input == 88) && c->getRemainingAbilityMoves() > 0) // 120 and 88 is X in ASCII
         {
-            // map->setCell(c->getX(), c->getY(), new Cell());
+            map->setCell(c->getX(), c->getY(), new Cell());
             c->useAbility();
             if (c->getName() == 'L')
             {
@@ -72,7 +72,7 @@ void Engine::controller()
                     int curr = c->getX() + 1;
                     while (curr <= 9)
                     {
-                        if (map->objectAt(c->getX(), curr)->getName() == 'B' || map->objectAt(c->getX(), curr)->getName() == 'T')
+                        if (map->objectAt(curr, c->getY())->getName() == 'B' || map->objectAt(curr, c->getY())->getName() == 'T')
                             map->setCell(curr, c->getY(), new Cell());
                         curr++;
                     }
@@ -82,7 +82,7 @@ void Engine::controller()
                     int curr = c->getX() - 1;
                     while (curr >= 0)
                     {
-                        if (map->objectAt(c->getX(), curr)->getName() == 'B' || map->objectAt(c->getX(), curr)->getName() == 'T')
+                        if (map->objectAt(curr, c->getY())->getName() == 'B' || map->objectAt(curr, c->getY())->getName() == 'T')
                             map->setCell(curr, c->getY(), new Cell());
                         curr--;
                     }
@@ -91,7 +91,7 @@ void Engine::controller()
         }
         else
         {
-            // map->setCell(c->getX(), c->getY(), new Cell());
+            map->setCell(c->getX(), c->getY(), new Cell());
 
             if (input == 56) // 8
                 c->setLocation(c->getX() + 1, c->getY());
@@ -127,25 +127,25 @@ void Engine::update()
         Potion *temp = (Potion *)map->objectAt(c->getX(), c->getY());
         temp->execute(c);
     }
-    // else if (map->objectAt(c->getX(), c->getY())->getName() == 'C')
-    // {
-    //     Coin *temp = (Coin *)map->objectAt(c->getX(), c->getY());
-    //     temp->execute(c);
-    // }
-    // else if (map->objectAt(c->getX(), c->getY())->getName() == 'T')
-    // {
-    //     Thief *temp = (Thief *)map->objectAt(c->getX(), c->getY());
-    //     temp->execute(c);
-    // }
-    // else if (map->objectAt(c->getX(), c->getY())->getName() == 'B')
-    // {
-    //     Bomb *temp = (Bomb *)map->objectAt(c->getX(), c->getY());
-    //     temp->execute(c);
-    // }
+    else if (map->objectAt(c->getX(), c->getY())->getName() == 'C')
+    {
+        Coin *temp = (Coin *)map->objectAt(c->getX(), c->getY());
+        temp->execute(c);
+    }
+    else if (map->objectAt(c->getX(), c->getY())->getName() == 'T')
+    {
+        Thief *temp = (Thief *)map->objectAt(c->getX(), c->getY());
+        temp->execute(c);
+    }
+    else if (map->objectAt(c->getX(), c->getY())->getName() == 'B')
+    {
+        Bomb *temp = (Bomb *)map->objectAt(c->getX(), c->getY());
+        temp->execute(c);
+    }
 
-    c->setCurrentHP(c->getCurrentHP() - 1);
+    // c->setCurrentHP(c->getCurrentHP() - 1);
 
-    // map->setCell(c->getX(), c->getY(), c);
+    map->setCell(c->getX(), c->getY(), c);
     map->printMap();
     c->printChampionInfo();
 }

@@ -116,6 +116,10 @@ void Champion::setRemainingAbilityMoves(int x)
 Mario::Mario() : Champion('M')
 {
     this->name = 'M';
+    this->maxHP = 100;
+    this->currentHP = this->maxHP;
+    this->gemsCollected = 0;
+    this->remainingAbilityMoves = 2;
 }
 
 void Mario::useAbility()
@@ -166,6 +170,20 @@ void Mario::setLocation(int x, int y)
         this->y = y;
 }
 
+void Mario::printChampionInfo()
+{
+    cout << "Champion: " << this->name << endl;
+    cout << "Location: " << this->x << ", " << this->y << endl;
+    cout << "HP: " << this->currentHP << endl;
+    cout << "Gems: " << this->gemsCollected << endl;
+    cout << "Remaining ability moves: " << this->remainingAbilityMoves << endl;
+}
+
+int Mario::getRemainingAbilityMoves()
+{
+    return this->remainingAbilityMoves;
+}
+
 Mario::~Mario()
 {
 }
@@ -173,6 +191,10 @@ Mario::~Mario()
 Luigi::Luigi() : Champion('L')
 {
     this->name = 'L';
+    this->maxHP = 100;
+    this->currentHP = this->maxHP;
+    this->gemsCollected = 0;
+    this->remainingAbilityMoves = 2;
 }
 
 void Luigi::useAbility()
@@ -202,6 +224,20 @@ void Luigi::setLocation(int x, int y)
         this->x = x;
     if (y < 10 && y >= 0)
         this->y = y;
+}
+
+void Luigi::printChampionInfo()
+{
+    cout << "Champion: " << this->name << endl;
+    cout << "Location: " << this->x << ", " << this->y << endl;
+    cout << "HP: " << this->currentHP << endl;
+    cout << "Gems: " << this->gemsCollected << endl;
+    cout << "Remaining ability moves: " << this->remainingAbilityMoves << endl;
+}
+
+int Luigi::getRemainingAbilityMoves()
+{
+    return this->remainingAbilityMoves;
 }
 
 Luigi::~Luigi()

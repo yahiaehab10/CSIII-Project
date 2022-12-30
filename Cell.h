@@ -31,15 +31,15 @@ public:
     void setCurrentHP(int hp);
     int getNumOfGems();
     void setNumOfGems(int gems);
-    void printChampionInfo();
+    virtual void printChampionInfo();
     virtual void useAbility();
-    int getRemainingAbilityMoves();
+    virtual int getRemainingAbilityMoves();
     void setRemainingAbilityMoves(int x);
 };
 
 #pragma region ChampionChildren
 
-class Mario : public Champion
+class Mario : virtual public Champion
 {
 private:
     char name;
@@ -52,10 +52,12 @@ public:
     int getX();
     int getY();
     void setLocation(int x, int y);
+    void printChampionInfo();
+    int getRemainingAbilityMoves();
     ~Mario();
 };
 
-class Luigi : public Champion
+class Luigi : virtual public Champion
 {
 private:
     char name;
@@ -68,6 +70,8 @@ public:
     int getX();
     int getY();
     void setLocation(int x, int y);
+    void printChampionInfo();
+    int getRemainingAbilityMoves();
     ~Luigi();
 };
 

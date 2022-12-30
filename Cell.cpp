@@ -86,7 +86,12 @@ int Champion::getNumOfGems()
 
 void Champion::setNumOfGems(int gems)
 {
-    this->gemsCollected = gems;
+    if (gems < 0)
+        this->gemsCollected = 0;
+    else if (gems > 40)
+        this->gemsCollected = 40;
+    else
+        this->gemsCollected = gems;
 }
 
 void Champion::printChampionInfo()
@@ -201,7 +206,12 @@ int Mario::getNumOfGems()
 
 void Mario::setNumOfGems(int gems)
 {
-    this->gemsCollected = gems;
+    if (gems < 0)
+        this->gemsCollected = 0;
+    else if (gems > 40)
+        this->gemsCollected = 40;
+    else
+        this->gemsCollected = gems;
 }
 
 int Mario::getRemainingAbilityMoves()
@@ -282,7 +292,12 @@ int Luigi::getNumOfGems()
 
 void Luigi::setNumOfGems(int gems)
 {
-    this->gemsCollected = gems;
+    if (gems < 0)
+        this->gemsCollected = 0;
+    else if (gems > 40)
+        this->gemsCollected = 40;
+    else
+        this->gemsCollected = gems;
 }
 
 int Luigi::getRemainingAbilityMoves()

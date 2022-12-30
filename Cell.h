@@ -6,20 +6,16 @@ class Cell
 {
 private:
     char name;
-    int x, y;
 
 public:
     Cell();
-    Cell(char name, int x, int y);
-    char getName();
-    int getX();
-    int getY();
+    Cell(char name);
     void setName(char name);
-    void setLocation(int x, int y);
+    virtual char getName();
     ~Cell();
 };
 
-class Champion : virtual public Cell
+class Champion : public Cell
 {
 private:
     char name;
@@ -27,6 +23,10 @@ private:
 
 public:
     Champion(char name);
+    virtual char getName();
+    virtual int getX();
+    virtual int getY();
+    virtual void setLocation(int x, int y);
     int getCurrentHP();
     void setCurrentHP(int hp);
     int getNumOfGems();
@@ -39,7 +39,7 @@ public:
 
 #pragma region ChampionChildren
 
-class Mario : virtual public Champion
+class Mario : public Champion
 {
 private:
     char name;
@@ -48,10 +48,14 @@ private:
 public:
     Mario();
     void useAbility();
+    char getName();
+    int getX();
+    int getY();
+    void setLocation(int x, int y);
     ~Mario();
 };
 
-class Luigi : virtual public Champion
+class Luigi : public Champion
 {
 private:
     char name;
@@ -60,20 +64,24 @@ private:
 public:
     Luigi();
     void useAbility();
+    char getName();
+    int getX();
+    int getY();
+    void setLocation(int x, int y);
     ~Luigi();
 };
 
 #pragma endregion
 
-class Obstacle : virtual public Cell
+class Obstacle : public Cell
 {
 private:
     char name;
-    int x, y, amount;
+    int amount;
 
 public:
-    Obstacle(char name, int x, int y);
-    int getAmount();
+    Obstacle(char name);
+    virtual int getAmount();
     virtual void execute(Champion *champ);
     ~Obstacle();
 };
@@ -84,10 +92,11 @@ class Bomb : public Obstacle
 {
 private:
     char name;
-    int x, y, amount;
+    int amount;
 
 public:
-    Bomb(int x, int y);
+    Bomb();
+    int getAmount();
     void execute(Champion *champ);
     ~Bomb();
 };
@@ -96,24 +105,25 @@ class Thief : public Obstacle
 {
 private:
     char name;
-    int x, y, amount;
+    int amount;
 
 public:
-    Thief(int x, int y);
+    Thief();
+    int getAmount();
     void execute(Champion *champ);
     ~Thief();
 };
 
 #pragma endregion
 
-class Gem : virtual public Cell
+class Gem : public Cell
 {
 private:
     char name;
-    int x, y, amount;
+    int amount;
 public:
-    Gem(int x, int y);
-    int getAmount();
+    Gem(char name);
+    virtual int getAmount();
     virtual void execute(Champion *champ);
     ~Gem();
 };
@@ -124,9 +134,10 @@ class Coin : public Gem
 {
 private:
     char name;
-    int x, y, amount;
+    int amount;
 public:
-    Coin(int x, int y);
+    Coin();
+    int getAmount();
     void execute(Champion *champ);
     ~Coin();
 };
@@ -135,9 +146,10 @@ class Potion : public Gem
 {
 private:
     char name;
-    int x, y, amount;
+    int amount;
 public:
-    Potion(int x, int y);
+    Potion();
+    int getAmount();
     void execute(Champion *champ);
     ~Potion();
 };

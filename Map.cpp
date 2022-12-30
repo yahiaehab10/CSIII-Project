@@ -14,15 +14,16 @@ Map::Map()
     randomiseMap();
 }
 
+Map* Map::getMap()
+{
+    return this;
+}
+
 void Map::setCell(int x, int y, Cell *c)
 {
     board[x][y] = c;
 }
 
-Map* Map::getMap()
-{
-    return this;
-}
 
 void Map::randomiseMap()
 {
@@ -30,8 +31,7 @@ void Map::randomiseMap()
     {
         for (int j = 0; j < 10; j++)
         {
-            Cell *temp = new Cell('.', i, j);
-            board[i][j] = temp;
+            board[i][j] = new Cell();
         }
     }
 
@@ -42,37 +42,7 @@ void Map::randomiseMap()
 
         if (board[x][y]->getName() == '.' && !(x == 0 && y == 0))
         {
-            Cell *temp = new Bomb(x, y);
-            board[x][y] = temp;
-        }
-        else
-            i--;
-    }
-
-    // for (int i = 0; i < 10; i++) // bomb creation
-    // {
-    //     int x = rand() % 10;
-    //     int y = rand() % 10;
-
-    //     if (board[x][y].getName() == '.' && !(x == 0 && y == 0))
-    //     {
-    //         Obstacle *temp = new Obstacle('x', x, y);
-    //         board[x][y] = *temp;
-    //     }
-    //     else
-    //         i--;
-    // }
-
-
-    for (int i = 0; i < 40; i++) // gem placement
-    {
-        int x = rand() % 10;
-        int y = rand() % 10;
-
-        if (board[x][y]->getName() == '.' && !(x == 0 && y == 0))
-        {
-            Gem *temp = new Coin(x, y);
-            board[x][y] = temp;
+            board[x][y] = new Bomb();
         }
         else
             i--;
@@ -85,12 +55,38 @@ void Map::randomiseMap()
 
         if (board[x][y]->getName() == '.' && !(x == 0 && y == 0))
         {
-            Thief *temp = new Thief(x, y);
-            board[x][y] = temp;
+            board[x][y] = new Thief();
         }
         else
             i--;
     }
+
+    for (int i = 0; i < 20; i++) // coin placement
+    {
+        int x = rand() % 10;
+        int y = rand() % 10;
+
+        if (board[x][y]->getName() == '.' && !(x == 0 && y == 0))
+        {
+            board[x][y] = new Coin();
+        }
+        else
+            i--;
+    }
+
+    for (int i = 0; i < 20; i++) // potion creation
+    {
+        int x = rand() % 10;
+        int y = rand() % 10;
+
+        if (board[x][y]->getName() == '.' && !(x == 0 && y == 0))
+        {
+            board[x][y] = new Potion();
+        }
+        else
+            i--;
+    }
+
     printMap();
 }
 

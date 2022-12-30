@@ -42,7 +42,7 @@ void Engine::controller()
         int input = getch();
         if ((input == 120 || input == 88) && c->getRemainingAbilityMoves() > 0) // 120 and 88 is X in ASCII
         {
-            map->setCell(c->getX(), c->getY(), new Cell('.', c->getX(), c->getY()));
+            // map->setCell(c->getX(), c->getY(), new Cell());
             c->useAbility();
             if (c->getName() == 'L')
             {
@@ -52,8 +52,8 @@ void Engine::controller()
                     int curr = c->getY() + 1;
                     while (curr <= 9)
                     {
-                        if (map->objectAt(c->getX(), curr)->getName() == 'x')
-                            map->setCell(c->getX(), curr, new Cell('.', c->getX(), c->getY()));
+                        if (map->objectAt(c->getX(), curr)->getName() == 'B' || map->objectAt(c->getX(), curr)->getName() == 'T')
+                            map->setCell(c->getX(), curr, new Cell());
                         curr++;
                     }
                 }
@@ -62,8 +62,8 @@ void Engine::controller()
                     int curr = c->getY() - 1;
                     while (curr >= 0)
                     {
-                        if (map->objectAt(c->getX(), curr)->getName() == 'x')
-                            map->setCell(c->getX(), curr, new Cell('.', c->getX(), c->getY()));
+                        if (map->objectAt(c->getX(), curr)->getName() == 'B' || map->objectAt(c->getX(), curr)->getName() == 'T')
+                            map->setCell(c->getX(), curr, new Cell());
                         curr--;
                     }
                 }
@@ -72,8 +72,8 @@ void Engine::controller()
                     int curr = c->getX() + 1;
                     while (curr <= 9)
                     {
-                        if (map->objectAt(curr, c->getY())->getName() == 'x')
-                            map->setCell(curr, c->getY(), new Cell('.', c->getX(), c->getY()));
+                        if (map->objectAt(c->getX(), curr)->getName() == 'B' || map->objectAt(c->getX(), curr)->getName() == 'T')
+                            map->setCell(curr, c->getY(), new Cell());
                         curr++;
                     }
                 }
@@ -82,18 +82,16 @@ void Engine::controller()
                     int curr = c->getX() - 1;
                     while (curr >= 0)
                     {
-                        if (map->objectAt(curr, c->getY())->getName() == 'x')
-                            map->setCell(curr, c->getY(), new Cell('.', c->getX(), c->getY()));
+                        if (map->objectAt(c->getX(), curr)->getName() == 'B' || map->objectAt(c->getX(), curr)->getName() == 'T')
+                            map->setCell(curr, c->getY(), new Cell());
                         curr--;
                     }
                 }
-
-                c->setRemainingAbilityMoves(c->getRemainingAbilityMoves() - 1);
             }
         }
         else
         {
-            map->setCell(c->getX(), c->getY(), new Cell('.', c->getX(), c->getY()));
+            // map->setCell(c->getX(), c->getY(), new Cell());
 
             if (input == 56) // 8
                 c->setLocation(c->getX() + 1, c->getY());
@@ -110,12 +108,12 @@ void Engine::controller()
         update();
     }
 
-    if (c->getNumOfGems() == 40)
+    if (c->getNumOfGems() >= 40)
     {
         cout << "You Won! :D" << endl;
         PlaySound(TEXT("Resources/Win.wav"), NULL, SND_FILENAME);
     }
-    else if (c->getCurrentHP() == 0)
+    else if (c->getCurrentHP() <= 0)
     {
         cout << "You Lost! D:" << endl;
         PlaySound(TEXT("Resources/Death.wav"), NULL, SND_FILENAME);
@@ -124,14 +122,31 @@ void Engine::controller()
 
 void Engine::update()
 {
-    if (map->objectAt(c->getX(), c->getY())->getName() == 'G')
-        c->setNumOfGems(c->getNumOfGems() + 1);
-    else if (map->objectAt(c->getX(), c->getY())->getName() == 'x')
-        c->setCurrentHP(c->getCurrentHP() - 40);
+    if (map->objectAt(c->getX(), c->getY())->getName() == 'P')
+    {
+        Potion *temp = (Potion *)map->objectAt(c->getX(), c->getY());
+        temp->execute(c);
+    }
+    // else if (map->objectAt(c->getX(), c->getY())->getName() == 'C')
+    // {
+    //     Coin *temp = (Coin *)map->objectAt(c->getX(), c->getY());
+    //     temp->execute(c);
+    // }
+    // else if (map->objectAt(c->getX(), c->getY())->getName() == 'T')
+    // {
+    //     Thief *temp = (Thief *)map->objectAt(c->getX(), c->getY());
+    //     temp->execute(c);
+    // }
+    // else if (map->objectAt(c->getX(), c->getY())->getName() == 'B')
+    // {
+    //     Bomb *temp = (Bomb *)map->objectAt(c->getX(), c->getY());
+    //     temp->execute(c);
+    // }
 
-    map->setCell(c->getX(), c->getY(), c);
+    c->setCurrentHP(c->getCurrentHP() - 1);
+
+    // map->setCell(c->getX(), c->getY(), c);
     map->printMap();
-    cout << c->getName() << endl;
     c->printChampionInfo();
 }
 

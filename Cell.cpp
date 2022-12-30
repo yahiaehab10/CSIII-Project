@@ -162,6 +162,21 @@ int Mario::getY()
     return this->y;
 }
 
+int Mario::getCurrentHP()
+{
+    return this->currentHP;
+}
+
+void Mario::setCurrentHP(int hp)
+{
+    if (hp > this->maxHP)
+        this->currentHP = this->maxHP;
+    else if (hp < 0)
+        this->currentHP = 0;
+    else
+        this->currentHP = hp;
+}
+
 void Mario::setLocation(int x, int y)
 {
     if (x < 10 && x >= 0)
@@ -177,6 +192,16 @@ void Mario::printChampionInfo()
     cout << "HP: " << this->currentHP << endl;
     cout << "Gems: " << this->gemsCollected << endl;
     cout << "Remaining ability moves: " << this->remainingAbilityMoves << endl;
+}
+
+int Mario::getNumOfGems()
+{
+    return this->gemsCollected;
+}
+
+void Mario::setNumOfGems(int gems)
+{
+    this->gemsCollected = gems;
 }
 
 int Mario::getRemainingAbilityMoves()
@@ -218,6 +243,21 @@ int Luigi::getY()
     return this->y;
 }
 
+int Luigi::getCurrentHP()
+{
+    return this->currentHP;
+}
+
+void Luigi::setCurrentHP(int hp)
+{
+    if (hp > this->maxHP)
+        this->currentHP = this->maxHP;
+    else if (hp < 0)
+        this->currentHP = 0;
+    else
+        this->currentHP = hp;
+}
+
 void Luigi::setLocation(int x, int y)
 {
     if (x < 10 && x >= 0)
@@ -233,6 +273,16 @@ void Luigi::printChampionInfo()
     cout << "HP: " << this->currentHP << endl;
     cout << "Gems: " << this->gemsCollected << endl;
     cout << "Remaining ability moves: " << this->remainingAbilityMoves << endl;
+}
+
+int Luigi::getNumOfGems()
+{
+    return this->gemsCollected;
+}
+
+void Luigi::setNumOfGems(int gems)
+{
+    this->gemsCollected = gems;
 }
 
 int Luigi::getRemainingAbilityMoves()
@@ -266,18 +316,12 @@ Obstacle::~Obstacle()
 
 Bomb::Bomb() : Obstacle('B')
 {
-    this->name = 'B';
-}
-
-int Bomb::getAmount()
-{
-    return this->amount;
 }
 
 void Bomb::execute(Champion *champ)
 {
-    cout << "Bomb is executed with amount: " << this->amount << endl;
-    champ->setCurrentHP(champ->getCurrentHP() - this->amount);
+    cout << "Bomb is executed with amount: " << this->getAmount() << endl;
+    champ->setCurrentHP(champ->getCurrentHP() - this->getAmount());
 }
 
 Bomb::~Bomb()
@@ -286,18 +330,12 @@ Bomb::~Bomb()
 
 Thief::Thief() : Obstacle('T')
 {
-    this->name = 'T';
-}
-
-int Thief::getAmount()
-{
-    return this->amount;
 }
 
 void Thief::execute(Champion *champ)
 {
-    cout << "Thief is executed with amount: " << this->amount << endl;
-    champ->setNumOfGems(champ->getNumOfGems() - this->amount);
+    cout << "Thief is executed with amount: " << this->getAmount() << endl;
+    champ->setNumOfGems(champ->getNumOfGems() - this->getAmount());
 }
 
 Thief::~Thief()
@@ -326,18 +364,12 @@ Gem::~Gem()
 
 Coin::Coin() : Gem('C')
 {
-    this->name = 'C';
-}
-
-int Coin::getAmount()
-{
-    return this->amount;
 }
 
 void Coin::execute(Champion *champ)
 {
-    cout << "Coin is executed with amount: " << this->amount << endl;
-    champ->setNumOfGems(champ->getNumOfGems() + this->amount);
+    cout << "Coin is executed with amount: " << this->getAmount() << endl;
+    champ->setNumOfGems(champ->getNumOfGems() + this->getAmount());
 }
 
 Coin::~Coin()
@@ -346,18 +378,12 @@ Coin::~Coin()
 
 Potion::Potion() : Gem('P')
 {
-    this->name = 'P';
-}
-
-int Potion::getAmount()
-{
-    return this->amount;
 }
 
 void Potion::execute(Champion *champ)
 {
-    cout << "Potion is executed with amount: " << this->amount << endl;
-    champ->setCurrentHP(champ->getCurrentHP() + this->amount);
+    cout << "Potion is executed with amount: " << this->getAmount() << endl;
+    champ->setCurrentHP(champ->getCurrentHP() + this->getAmount());
 }
 
 Potion::~Potion()

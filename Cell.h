@@ -27,10 +27,10 @@ public:
     virtual int getX();
     virtual int getY();
     virtual void setLocation(int x, int y);
-    int getCurrentHP();
-    void setCurrentHP(int hp);
-    int getNumOfGems();
-    void setNumOfGems(int gems);
+    virtual int getCurrentHP();
+    virtual void setCurrentHP(int hp);
+    virtual int getNumOfGems();
+    virtual void setNumOfGems(int gems);
     virtual void printChampionInfo();
     virtual void useAbility();
     virtual int getRemainingAbilityMoves();
@@ -51,8 +51,12 @@ public:
     char getName();
     int getX();
     int getY();
+    int getCurrentHP();
+    void setCurrentHP(int hp);
     void setLocation(int x, int y);
     void printChampionInfo();
+    int getNumOfGems();
+    void setNumOfGems(int gems);
     int getRemainingAbilityMoves();
     ~Mario();
 };
@@ -69,8 +73,12 @@ public:
     char getName();
     int getX();
     int getY();
+    int getCurrentHP();
+    void setCurrentHP(int hp);
     void setLocation(int x, int y);
     void printChampionInfo();
+    int getNumOfGems();
+    void setNumOfGems(int gems);
     int getRemainingAbilityMoves();
     ~Luigi();
 };
@@ -85,7 +93,7 @@ private:
 
 public:
     Obstacle(char name);
-    virtual int getAmount();
+    int getAmount();
     virtual void execute(Champion *champ);
     ~Obstacle();
 };
@@ -95,12 +103,9 @@ public:
 class Bomb : public Obstacle
 {
 private:
-    char name;
-    int amount;
 
 public:
     Bomb();
-    int getAmount();
     void execute(Champion *champ);
     ~Bomb();
 };
@@ -108,12 +113,9 @@ public:
 class Thief : public Obstacle
 {
 private:
-    char name;
-    int amount;
 
 public:
     Thief();
-    int getAmount();
     void execute(Champion *champ);
     ~Thief();
 };
@@ -127,7 +129,7 @@ private:
     int amount;
 public:
     Gem(char name);
-    virtual int getAmount();
+    int getAmount();
     virtual void execute(Champion *champ);
     ~Gem();
 };
@@ -137,11 +139,9 @@ public:
 class Coin : public Gem
 {
 private:
-    char name;
-    int amount;
+
 public:
     Coin();
-    int getAmount();
     void execute(Champion *champ);
     ~Coin();
 };
@@ -149,11 +149,9 @@ public:
 class Potion : public Gem
 {
 private:
-    char name;
-    int amount;
+
 public:
     Potion();
-    int getAmount();
     void execute(Champion *champ);
     ~Potion();
 };

@@ -1,5 +1,7 @@
-                                Mario game
-                                   -------------
+
+                                                  Mario game
+
+
 
 Mario Project (without GUI) The project was given by the university in the third semester.
 

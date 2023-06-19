@@ -1,32 +1,29 @@
+# Mario Game
 
-                                                  Mario game
+This project is a text-based Mario game developed during the third semester as a university assignment. The game does not have a graphical user interface (GUI) and is played solely through text commands.
 
+## Game Flow
 
+1. Choose Your Character: At the beginning of the game, you can select either Mario or Luigi as your character.
 
-Mario Project (without GUI) The project was given by the university in the third semester.
+2. Special Powers:
+   - Mario: Mario can move two steps in the chosen direction.
+   - Luigi: Luigi can remove all obstacles in front of him in the selected direction without moving.
 
-Game flow
-1) Choose whether you want to play with Mario or Luigi.
+3. Movement: Navigate through the game map using the following commands:
+   - 8: Move up
+   - 5: Move down
+   - 6: Move right
+   - 4: Move left
 
+4. Collect Gems: Your objective is to collect gems while avoiding obstacles that can cause health loss.
 
-2) Mario and Luigi both have different special powers.
+5. Win Condition: If you collect 40 gems before losing all your health, you win the game.
 
-        a)Mario: Allows him to move 2 steps in the chosen direction.
-        
-        b)Luigi: He an remove all obstacles in front of him in the selected direction (without moving)
-        
-    
-3)  Moving with [8(up) , 5(down) , 6(right) and 4 (left)] in the map
+## Rules
 
+1. Avoid Bombs: Be cautious and avoid coming into contact with bombs.
 
-4) Collect gems until you win and avoid obstacles to avoid health loss.
+2. Limited Abilities: Remember that special powers are limited, so use them strategically.
 
-
-5) If you collected 40 gems before dying then you win 
-
-
-Rules;
-
-1)You should avoid Bombs
-
-2)Abilities are limited
+Enjoy playing the Mario game!
